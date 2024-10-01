@@ -13,3 +13,17 @@ body{
 #startGameButton{
     border-radius: 1rem; 
 }
+
+.container{
+    display: grid;
+    border: 2px solid black;
+    grid: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    height: 600px;
+    width: 600px;
+    margin-top: 2rem;
+}
+
+.box{
+    border: 1px solid white;
+    background-color: wheat;
+}
