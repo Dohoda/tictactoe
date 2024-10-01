@@ -38,7 +38,19 @@ function GameBoard(){
         }
     }
 
-    return {gameBoard,checkWinCondition};
+    function DrawBoard(){
+
+        const container = document.querySelector(".container");
+        
+        for(let i = 0; i < 9; i++){
+            const box = document.createElement("div");
+            box.classList.add("box");
+            box.setAttribute("id","cell" + i);
+            container.appendChild(box);
+        }
+    }
+
+    return {gameBoard,checkWinCondition,DrawBoard};
 }
 
 function Game(){
@@ -55,7 +67,6 @@ function Game(){
     
     button.addEventListener("click",function(e){
         e.preventDefault();
-        document.body.innerHTML = "";
         p1Name = labelP1.textContent;
         p2Name = labelP2.textContent;
         StartGame();
@@ -64,26 +75,11 @@ function Game(){
 
     function StartGame(){
 
-        
-     const p1 = Player(p1Name,0);
-     const p2 = Player(p2Name,0);
+        const p1 = Player(p1Name,0);
+        const p2 = Player(p2Name,0);
     
-     const board = GameBoard();
-
-     for(let gameTurn = 0; gameTurn < 9; gameTurn++){
-         let p1Choice = prompt("P1 choice:");
-         board.gameBoard[p1Choice] = "X";
-
-         if(gameTurn > 1){
-             board.checkWinCondition();
-         }
-
-         let p2Choice = prompt("P2 choice:");
-         board.gameBoard[p2Choice] = "O";
-
-         console.log(gameTurn);
-         console.log(board.gameBoard);
-        }
+        const board = GameBoard();
+        board.DrawBoard();
     }
 }
 
