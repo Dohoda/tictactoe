@@ -45,8 +45,7 @@ function Game(){
 
     const labelP1 = document.querySelector("#name1");
     const labelP2 = document.querySelector("#name2");
-    
-    let gameStarted = false;
+
     let p1Name = "";
     let p1Score = 0;
     let p2Name = "";
@@ -57,13 +56,13 @@ function Game(){
     button.addEventListener("click",function(e){
         e.preventDefault();
         document.body.innerHTML = "";
-        gameStarted = true;
         p1Name = labelP1.textContent;
         p2Name = labelP2.textContent;
+        StartGame();
     });
   
 
-    if(gameStarted == true){
+    function StartGame(){
 
         
      const p1 = Player(p1Name,0);
@@ -84,6 +83,8 @@ function Game(){
 
          console.log(gameTurn);
          console.log(board.gameBoard);
-     }
+        }
     }
 }
+
+Game();
