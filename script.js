@@ -43,24 +43,47 @@ function GameBoard(){
 
 function Game(){
 
-    const p1 = Player(p1Name,0);
-    const p2 = Player(p2Name,0);
+    const labelP1 = document.querySelector("#name1");
+    const labelP2 = document.querySelector("#name2");
     
-    const board = GameBoard();
+    let gameStarted = false;
+    let p1Name = "";
+    let p1Score = 0;
+    let p2Name = "";
+    let p2Score = 0;
 
-    for(let gameTurn = 0; gameTurn < 9; gameTurn++){
-        let p1Choice = prompt("P1 choice:");
-        board.gameBoard[p1Choice] = "X";
+    const button = document.querySelector("#startGameButton");
+    
+    button.addEventListener("click",function(e){
+        e.preventDefault();
+        document.body.innerHTML = "";
+        gameStarted = true;
+        p1Name = labelP1.textContent;
+        p2Name = labelP2.textContent;
+    });
+  
 
-        if(gameTurn > 1){
-            board.checkWinCondition();
-        }
+    if(gameStarted == true){
 
-        let p2Choice = prompt("P2 choice:");
-        board.gameBoard[p2Choice] = "O";
+        
+     const p1 = Player(p1Name,0);
+     const p2 = Player(p2Name,0);
+    
+     const board = GameBoard();
 
-        console.log(gameTurn);
-        console.log(board.gameBoard);
+     for(let gameTurn = 0; gameTurn < 9; gameTurn++){
+         let p1Choice = prompt("P1 choice:");
+         board.gameBoard[p1Choice] = "X";
+
+         if(gameTurn > 1){
+             board.checkWinCondition();
+         }
+
+         let p2Choice = prompt("P2 choice:");
+         board.gameBoard[p2Choice] = "O";
+
+         console.log(gameTurn);
+         console.log(board.gameBoard);
+     }
     }
 }
-
