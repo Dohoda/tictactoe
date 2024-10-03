@@ -63,6 +63,8 @@ function Game(){
     let p2Name = "";
     let p2Score = 0;
 
+    let turn = 1;
+
     const button = document.querySelector("#startGameButton");
     
     button.addEventListener("click",function(e){
@@ -81,6 +83,11 @@ function Game(){
         const board = GameBoard();
         board.DrawBoard();
     }
+
+    const getTurn = () => turn;
+    const incrementTurn = () => turn++;
+
+    return{getTurn,incrementTurn};
 }
 
-Game();
+const game = Game();
