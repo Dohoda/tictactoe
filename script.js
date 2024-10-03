@@ -7,6 +7,7 @@ function Player(name,score){
 function GameBoard(){
 
     const gameBoard =["","","","","","","","",""];
+    
 
     function checkWinCondition(){ 
 
@@ -45,7 +46,19 @@ function GameBoard(){
         for(let i = 0; i < 9; i++){
             const box = document.createElement("div");
             box.classList.add("box");
-            box.setAttribute("id","cell" + i);
+            box.setAttribute("id",i);
+            box.addEventListener("click",function(e){
+                if(game.getTurn() % 2 == 1){
+                    e.target.textContent = "X";
+                    gameBoard[this.id] = "X";
+                    game.incrementTurn();
+                }
+                else{
+                    e.target.textContent = "O";
+                    gameBoard[this.id] = "O";
+                    game.incrementTurn();
+                }
+            },{once:true});
             container.appendChild(box);
         }
     }
@@ -65,6 +78,8 @@ function Game(){
 
     let turn = 1;
 
+    const board = GameBoard();
+
     const button = document.querySelector("#startGameButton");
     
     button.addEventListener("click",function(e){
@@ -79,13 +94,14 @@ function Game(){
 
         const p1 = Player(p1Name,0);
         const p2 = Player(p2Name,0);
-    
-        const board = GameBoard();
         board.DrawBoard();
     }
 
     const getTurn = () => turn;
-    const incrementTurn = () => turn++;
+    function incrementTurn(){
+        turn++;
+        board.checkWinCondition();
+    }
 
     return{getTurn,incrementTurn};
 }
