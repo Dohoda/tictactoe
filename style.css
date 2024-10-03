@@ -26,4 +26,19 @@ body{
 .box{
     border: 1px solid white;
     background-color: wheat;
+
+    font-size: 100px;
+    font-weight: 600;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box:hover{
+    border: 2px solid green;
+}
+
+.box:active{
+    opacity: 0.7;
 }
