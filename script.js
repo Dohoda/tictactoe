@@ -80,9 +80,22 @@ function GameBoard(){
 
         p1Status.textContent = game.getPlayer1Name() + ": " + game.getPlayer1Score();
         p2Status.textContent = game.getPlayer2Name() + ": " + game.getPlayer2Score();
+        gameStatus.textContent = game.getPlayer1Name() + "'s turn";
+
     }
 
-    return {gameBoard,checkWinCondition,DrawBoard,DrawStatus};
+    function RefreshStatus(){
+
+        const gameStatus = document.querySelector(".gameStatus");
+        if(game.getTurn() % 2 == 1){
+            gameStatus.textContent = game.getPlayer1Name() + "'s turn";
+        }
+        else{
+            gameStatus.textContent = game.getPlayer2Name() + "'s turn";
+        }
+    }
+
+    return {gameBoard,checkWinCondition,DrawBoard,DrawStatus,RefreshStatus};
 }
 
 function Game(){
@@ -126,6 +139,7 @@ function Game(){
     function incrementTurn(){
         turn++;
         board.checkWinCondition();
+        board.RefreshStatus();
     }
 
     return{getTurn,incrementTurn,Players,getPlayer1Name,getPlayer2Name,getPlayer1Score,getPlayer2Score};
