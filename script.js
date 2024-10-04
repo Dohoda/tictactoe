@@ -78,6 +78,8 @@ function GameBoard(){
         gameStatus.classList.add("gameStatus");
         statusContainer.appendChild(gameStatus);
 
+        console.log(game.Players().p1.name);
+        console.log(game.Players().p2.name);
 
     }
 
@@ -90,9 +92,6 @@ function Game(){
 
     const board = GameBoard();
 
-    const labelP1 = document.querySelector("#name1");
-    const labelP2 = document.querySelector("#name2");
-
     const button = document.querySelector("#startGameButton");
     
     button.addEventListener("click",function(e){
@@ -101,19 +100,30 @@ function Game(){
     });
 
     function StartGame(){
-        const p1 = Player(labelP1.textContent,0);
-        const p2 = Player(labelP2.textContent,0);
+        Players();
         board.DrawBoard();
         board.DrawStatus();
     }
 
+    function Players(){
+
+        const labelP1 = document.querySelector("#name1");
+        const labelP2 = document.querySelector("#name2");
+
+        const p1 = Player(labelP1.value,0);
+        const p2 = Player(labelP2.value,0);
+
+        return {p1,p2};
+    }
+
     const getTurn = () => turn;
+
     function incrementTurn(){
         turn++;
         board.checkWinCondition();
     }
 
-    return{getTurn,incrementTurn};
+    return{getTurn,incrementTurn,Players};
 }
 
 const game = Game();
