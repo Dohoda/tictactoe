@@ -78,11 +78,6 @@ function GameBoard(){
         gameStatus.classList.add("gameStatus");
         statusContainer.appendChild(gameStatus);
 
-        const labelP1 = document.querySelector("#name1");
-        const labelP2 = document.querySelector("#name2");
-
-        const p1 = Player(labelP1.textContent,0);
-        const p2 = Player(labelP2.textContent,0);
 
     }
 
@@ -95,6 +90,9 @@ function Game(){
 
     const board = GameBoard();
 
+    const labelP1 = document.querySelector("#name1");
+    const labelP2 = document.querySelector("#name2");
+
     const button = document.querySelector("#startGameButton");
     
     button.addEventListener("click",function(e){
@@ -103,6 +101,8 @@ function Game(){
     });
 
     function StartGame(){
+        const p1 = Player(labelP1.textContent,0);
+        const p2 = Player(labelP2.textContent,0);
         board.DrawBoard();
         board.DrawStatus();
     }
