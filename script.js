@@ -78,9 +78,8 @@ function GameBoard(){
         gameStatus.classList.add("gameStatus");
         statusContainer.appendChild(gameStatus);
 
-        console.log(game.Players().p1.name);
-        console.log(game.Players().p2.name);
-
+        p1Status.textContent = game.getPlayer1Name() + ": " + game.getPlayer1Score();
+        p2Status.textContent = game.getPlayer2Name() + ": " + game.getPlayer2Score();
     }
 
     return {gameBoard,checkWinCondition,DrawBoard,DrawStatus};
@@ -116,6 +115,12 @@ function Game(){
         return {p1,p2};
     }
 
+    const getPlayer1Name = () => Players().p1.name;
+    const getPlayer2Name = () => Players().p2.name;
+
+    const getPlayer1Score = () => Players().p1.score;
+    const getPlayer2Score = () => Players().p2.score;
+
     const getTurn = () => turn;
 
     function incrementTurn(){
@@ -123,7 +128,7 @@ function Game(){
         board.checkWinCondition();
     }
 
-    return{getTurn,incrementTurn,Players};
+    return{getTurn,incrementTurn,Players,getPlayer1Name,getPlayer2Name,getPlayer1Score,getPlayer2Score};
 }
 
 const game = Game();
