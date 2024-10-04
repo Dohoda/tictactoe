@@ -63,18 +63,33 @@ function GameBoard(){
         }
     }
 
-    return {gameBoard,checkWinCondition,DrawBoard};
+    function DrawStatus(){
+        const statusContainer = document.querySelector(".status-container");
+
+        const p1Status = document.createElement("div");
+        p1Status.classList.add("p1Status");
+        statusContainer.appendChild(p1Status);
+
+        const p2Status = document.createElement("div");
+        p2Status.classList.add("p2Status");
+        statusContainer.appendChild(p2Status);
+
+        const gameStatus = document.createElement("div");
+        gameStatus.classList.add("gameStatus");
+        statusContainer.appendChild(gameStatus);
+
+        const labelP1 = document.querySelector("#name1");
+        const labelP2 = document.querySelector("#name2");
+
+        const p1 = Player(labelP1.textContent,0);
+        const p2 = Player(labelP2.textContent,0);
+
+    }
+
+    return {gameBoard,checkWinCondition,DrawBoard,DrawStatus};
 }
 
 function Game(){
-
-    const labelP1 = document.querySelector("#name1");
-    const labelP2 = document.querySelector("#name2");
-
-    let p1Name = "";
-    let p1Score = 0;
-    let p2Name = "";
-    let p2Score = 0;
 
     let turn = 1;
 
@@ -84,17 +99,12 @@ function Game(){
     
     button.addEventListener("click",function(e){
         e.preventDefault();
-        p1Name = labelP1.textContent;
-        p2Name = labelP2.textContent;
         StartGame();
     });
-  
 
     function StartGame(){
-
-        const p1 = Player(p1Name,0);
-        const p2 = Player(p2Name,0);
         board.DrawBoard();
+        board.DrawStatus();
     }
 
     const getTurn = () => turn;
