@@ -51,3 +51,16 @@ body{
 .box:active{
     opacity: 0.7;
 }
+
+.gameStatus{
+    grid-area: 1 / 2 / 3 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p1Status,.p2Status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
