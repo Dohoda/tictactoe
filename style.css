@@ -23,6 +23,15 @@ body{
     margin-top: 2rem;
 }
 
+.status-container{
+    border: 2px solid black;
+    width: 600px;
+    height: 100px;
+    margin-top: 2rem;
+    display: grid;
+    grid: 1fr 1fr / 1fr 4fr;
+}
+
 .box{
     border: 1px solid white;
     background-color: wheat;
