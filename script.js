@@ -78,9 +78,9 @@ function GameBoard(){
         gameStatus.classList.add("gameStatus");
         statusContainer.appendChild(gameStatus);
 
-        p1Status.textContent = game.getPlayer1Name() + ": " + game.getPlayer1Score();
-        p2Status.textContent = game.getPlayer2Name() + ": " + game.getPlayer2Score();
-        gameStatus.textContent = game.getPlayer1Name() + "'s turn";
+        p1Status.textContent = game.Players().p1.name + ": " + game.Players().p1.score;
+        p2Status.textContent = game.Players().p2.name + ": " + game.Players().p2.score;
+        gameStatus.textContent = game.Players().p1.name + "'s turn";
 
     }
 
@@ -88,10 +88,10 @@ function GameBoard(){
 
         const gameStatus = document.querySelector(".gameStatus");
         if(game.getTurn() % 2 == 1){
-            gameStatus.textContent = game.getPlayer1Name() + "'s turn";
+            gameStatus.textContent = game.Players().p1.name + "'s turn";
         }
         else{
-            gameStatus.textContent = game.getPlayer2Name() + "'s turn";
+            gameStatus.textContent = game.Players().p2.name + "'s turn";
         }
     }
 
@@ -125,14 +125,12 @@ function Game(){
         const p1 = Player(labelP1.value,0);
         const p2 = Player(labelP2.value,0);
 
-        return {p1,p2};
+        const incrementPlayer1Score = () => p1.score++;
+
+        const incrementPlayer2Score = () => p1.score++;
+
+        return {p1,p2,incrementPlayer1Score,incrementPlayer2Score};
     }
-
-    const getPlayer1Name = () => Players().p1.name;
-    const getPlayer2Name = () => Players().p2.name;
-
-    const getPlayer1Score = () => Players().p1.score;
-    const getPlayer2Score = () => Players().p2.score;
 
     const getTurn = () => turn;
 
@@ -142,7 +140,7 @@ function Game(){
         board.RefreshStatus();
     }
 
-    return{getTurn,incrementTurn,Players,getPlayer1Name,getPlayer2Name,getPlayer1Score,getPlayer2Score};
+    return{getTurn,incrementTurn,Players};
 }
 
 const game = Game();
