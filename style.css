@@ -29,7 +29,7 @@ body{
     height: 100px;
     margin-top: 2rem;
     display: grid;
-    grid: 1fr 1fr / 1fr 4fr;
+    grid: 1fr 1fr / 1fr 2fr;
 }
 
 .box{
@@ -63,4 +63,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.p1Status,.p2Status,.gameStatus{
+    font-size: 20px;
+    font-weight: 600;
 }
