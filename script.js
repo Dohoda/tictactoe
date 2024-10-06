@@ -145,14 +145,21 @@ function Game(){
     let turn = 1;
     let p1;
     let p2;
+    let gameStarted = false;
 
     const board = GameBoard();
 
     const button = document.querySelector("#startGameButton");
     
     button.addEventListener("click",function(e){
-        e.preventDefault();
+       if(gameStarted == false){
+         e.preventDefault();
         StartGame();
+        gameStarted = true;
+       }
+       else{
+        e.preventDefault();
+       }
     });
 
     // to initialize the game and call necessary functions.
