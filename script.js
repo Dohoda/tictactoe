@@ -7,6 +7,9 @@ function Player(name,score){
 function GameBoard(){
 
     const gameBoard =["","","","","","","","",""];
+
+    let gameWon = false;
+    let playerWon = "";
     
 
     function checkWinCondition(){ 
@@ -15,7 +18,8 @@ function GameBoard(){
 
         for(let i = 0; i < 6; i += 3){
             if(gameBoard[i] == gameBoard[i+1] && gameBoard[i] == gameBoard[i+2] && gameBoard[i] != ""){
-                console.log(gameBoard[i] + " won!");
+                gameWon = true;
+                playerWon = gameBoard[i];
             }
         }
 
@@ -23,7 +27,8 @@ function GameBoard(){
 
         for(let i = 0; i < 3; i++){
             if(gameBoard[i] == gameBoard[i+3] && gameBoard[i] == gameBoard[i+6] && gameBoard[i] != ""){
-                console.log(gameBoard[i] + " won!");
+                gameWon = true;
+                playerWon = gameBoard[i];
             }
         }
 
@@ -31,10 +36,12 @@ function GameBoard(){
 
         for(let i = 0; i < 2; i += 2){
             if( i == 0 && gameBoard[i] == gameBoard[i+4] && gameBoard[i] == gameBoard[i+8] && gameBoard[i] != ""){
-                console.log(gameBoard[i] + " won!");
+                gameWon = true;
+                playerWon = gameBoard[i];
             }
             else if( i == 2 && gameBoard[i] == gameBoard[i+2] && gameBoard[i] == gameBoard[i+4] && gameBoard[i] != ""){
-                console.log(gameBoard[i] + " won!");
+                gameWon = true;
+                playerWon = gameBoard[i];
             }
         }
     }
@@ -86,12 +93,29 @@ function GameBoard(){
 
     function RefreshStatus(){
 
+        const p1Status = document.querySelector(".p1Status");
+        const p2Status = document.querySelector(".p2Status");
+
         const gameStatus = document.querySelector(".gameStatus");
         if(game.getTurn() % 2 == 1){
             gameStatus.textContent = game.Players().p1.name + "'s turn";
         }
         else{
             gameStatus.textContent = game.Players().p2.name + "'s turn";
+        }
+
+        if(gameWon == true && playerWon == "X"){
+            game.Players().incrementPlayer1Score();
+            p1Status.textContent = game.Players().p1.name + ": " + game.Players().p1.score;
+            gameStatus.textContent = game.Players().p1.name + " has won!";
+        }
+        else if(gameWon == true && playerWon == "O"){
+            game.Players().incrementPlayer2Score();
+            p2Status.textContent = game.Players().p2.name + ": " + game.Players().p2.score;
+            gameStatus.textContent = game.Players().p2.name + " has won!";
+        }
+        else if (game.getTurn() == 8){
+            gameStatus.textContent = "it is a draw!";
         }
     }
 
@@ -127,7 +151,7 @@ function Game(){
 
         const incrementPlayer1Score = () => p1.score++;
 
-        const incrementPlayer2Score = () => p1.score++;
+        const incrementPlayer2Score = () => p2.score++;
 
         return {p1,p2,incrementPlayer1Score,incrementPlayer2Score};
     }
