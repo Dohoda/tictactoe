@@ -134,7 +134,9 @@ function GameBoard(){
             gameStatus.textContent = "it is a draw!";
         }
 
-        RestartGameBoard();
+        if(gameWon == true){
+            RestartGameBoard();
+        }
     }
 
     function RestartGameBoard(){
@@ -143,6 +145,7 @@ function GameBoard(){
             const body = document.querySelector("body");
             const button = document.createElement("button");
             button.classList.add("restartButton");
+            button.textContent = "Restart Board";
             body.appendChild(button);
         }
     }

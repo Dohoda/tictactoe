@@ -44,11 +44,11 @@ body{
     align-items: center;
 }
 
-.box:hover{
+.box:hover,.restartButton:hover{
     border: 2px solid green;
 }
 
-.box:active{
+.box:active,.restartButton:active{
     opacity: 0.7;
 }
 
@@ -68,4 +68,16 @@ body{
 .p1Status,.p2Status,.gameStatus{
     font-size: 20px;
     font-weight: 600;
+}
+
+.restartButton{
+    height: 40px;
+    width: 200px;
+    font-size: 20px;
+    font-weight: 600;
+    border: 2px solid black;
+    border-radius: 1rem;
+    color: rgb(241, 235, 235);
+    background: rgba(254, 48, 48, 0.712);
+    margin-top: 10px;
 }
