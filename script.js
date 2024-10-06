@@ -125,6 +125,8 @@ function GameBoard(){
 function Game(){
 
     let turn = 1;
+    let p1;
+    let p2;
 
     const board = GameBoard();
 
@@ -136,18 +138,21 @@ function Game(){
     });
 
     function StartGame(){
-        Players();
+        CreatePlayers();
         board.DrawBoard();
         board.DrawStatus();
     }
 
-    function Players(){
-
+    function CreatePlayers(){
         const labelP1 = document.querySelector("#name1");
         const labelP2 = document.querySelector("#name2");
 
-        const p1 = Player(labelP1.value,0);
-        const p2 = Player(labelP2.value,0);
+        p1 = Player(labelP1.value,0);
+        p2 = Player(labelP2.value,0);
+
+    }
+
+    function Players(){
 
         const incrementPlayer1Score = () => p1.score++;
 
@@ -164,7 +169,7 @@ function Game(){
         board.RefreshStatus();
     }
 
-    return{getTurn,incrementTurn,Players};
+    return{getTurn,incrementTurn,CreatePlayers,Players};
 }
 
 const game = Game();
