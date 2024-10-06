@@ -134,18 +134,41 @@ function GameBoard(){
             gameStatus.textContent = "it is a draw!";
         }
 
+        // if game is won calls the function to restart game board
+
         if(gameWon == true){
             RestartGameBoard();
         }
     }
 
+    // resets the game board and re-initializes it
+
     function RestartGameBoard(){
 
         if(gameWon == true){
+            gameWon = false;
+            playerWon = "";
+
+            gameBoard.forEach((element,index) => gameBoard[index] = "");
+
             const body = document.querySelector("body");
+
             const button = document.createElement("button");
             button.classList.add("restartButton");
             button.textContent = "Restart Board";
+
+            // got rid of the container elements instantly cuz im too lazy to
+            // actually remove the event that makes the grids clickable.
+
+            const container = document.querySelector(".container");
+            container.innerHTML = "";
+
+            button.addEventListener("click",function(e){
+                const gameStatus = document.querySelector(".status-container");
+                gameStatus.innerHTML = "";
+                game.RestartGame();
+            });
+
             body.appendChild(button);
         }
     }
@@ -168,13 +191,13 @@ function Game(){
     
     button.addEventListener("click",function(e){
        if(gameStarted == false){
-         e.preventDefault();
-        StartGame();
-        gameStarted = true;
-       }
+            e.preventDefault();
+            StartGame();
+            gameStarted = true;
+        }
        else{
-        e.preventDefault();
-       }
+            e.preventDefault();
+        }
     });
 
     // to initialize the game and call necessary functions.
@@ -183,6 +206,17 @@ function Game(){
         CreatePlayers();
         board.DrawBoard();
         board.DrawStatus();
+    }
+
+    // restarts the game board and resets game information
+
+    function RestartGame(){
+        turn = 1;
+        board.DrawBoard();
+        board.DrawStatus();
+
+        const restartButton = document.querySelector(".restartButton");
+        restartButton.remove();
     }
 
     // creates players
@@ -217,7 +251,7 @@ function Game(){
         board.RefreshStatus();
     }
 
-    return{getTurn,incrementTurn,CreatePlayers,Players};
+    return{getTurn,incrementTurn,CreatePlayers,Players,RestartGame};
 }
 
 const game = Game();
