@@ -133,9 +133,21 @@ function GameBoard(){
         else if (game.getTurn() == 10){
             gameStatus.textContent = "it is a draw!";
         }
+
+        RestartGameBoard();
     }
 
-    return {gameBoard,checkWinCondition,DrawBoard,DrawStatus,RefreshStatus};
+    function RestartGameBoard(){
+
+        if(gameWon == true){
+            const body = document.querySelector("body");
+            const button = document.createElement("button");
+            button.classList.add("restartButton");
+            body.appendChild(button);
+        }
+    }
+
+    return {gameBoard,checkWinCondition,DrawBoard,DrawStatus,RefreshStatus,RestartGameBoard};
 }
 
 // Everything that makes visuals work goes here
