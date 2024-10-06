@@ -130,7 +130,7 @@ function GameBoard(){
             p2Status.textContent = game.Players().p2.name + ": " + game.Players().p2.score;
             gameStatus.textContent = game.Players().p2.name + " has won!";
         }
-        else if (game.getTurn() == 9){
+        else if (game.getTurn() == 10){
             gameStatus.textContent = "it is a draw!";
         }
     }
@@ -142,7 +142,7 @@ function GameBoard(){
 
 function Game(){
 
-    let turn = 0;
+    let turn = 1;
     let p1;
     let p2;
     let gameStarted = false;
