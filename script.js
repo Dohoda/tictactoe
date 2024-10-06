@@ -1,8 +1,12 @@
+// Stores player names and scores
+
 function Player(name,score){
     const players = {name,score};
 
     return {name,players,score};
 }
+
+// Everything visual goes here
 
 function GameBoard(){
 
@@ -11,6 +15,7 @@ function GameBoard(){
     let gameWon = false;
     let playerWon = "";
     
+    // for checking every possible win combination and determining the winning side.
 
     function checkWinCondition(){ 
 
@@ -46,6 +51,8 @@ function GameBoard(){
         }
     }
 
+    // draws the tic tac toe board when initialized
+
     function DrawBoard(){
 
         const container = document.querySelector(".container");
@@ -70,6 +77,8 @@ function GameBoard(){
         }
     }
 
+    // draws the status display for the first time
+
     function DrawStatus(){
         const statusContainer = document.querySelector(".status-container");
 
@@ -91,18 +100,25 @@ function GameBoard(){
 
     }
 
+    // refreshes the status display every turn
+
     function RefreshStatus(){
 
         const p1Status = document.querySelector(".p1Status");
         const p2Status = document.querySelector(".p2Status");
 
         const gameStatus = document.querySelector(".gameStatus");
+
+        // displays which player's turn currently is.
+
         if(game.getTurn() % 2 == 1){
             gameStatus.textContent = game.Players().p1.name + "'s turn";
         }
         else{
             gameStatus.textContent = game.Players().p2.name + "'s turn";
         }
+
+        // changes displays if a player wins.
 
         if(gameWon == true && playerWon == "X"){
             game.Players().incrementPlayer1Score();
@@ -122,6 +138,8 @@ function GameBoard(){
     return {gameBoard,checkWinCondition,DrawBoard,DrawStatus,RefreshStatus};
 }
 
+// Everything that makes visuals work goes here
+
 function Game(){
 
     let turn = 1;
@@ -137,11 +155,15 @@ function Game(){
         StartGame();
     });
 
+    // to initialize the game and call necessary functions.
+
     function StartGame(){
         CreatePlayers();
         board.DrawBoard();
         board.DrawStatus();
     }
+
+    // creates players
 
     function CreatePlayers(){
         const labelP1 = document.querySelector("#name1");
@@ -151,6 +173,8 @@ function Game(){
         p2 = Player(labelP2.value,0);
 
     }
+
+    // returns players' values and includes function to increase scores
 
     function Players(){
 
@@ -162,6 +186,8 @@ function Game(){
     }
 
     const getTurn = () => turn;
+
+    // things that needs to be called every time the turn increases.
 
     function incrementTurn(){
         turn++;
